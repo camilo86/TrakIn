@@ -8,3 +8,11 @@ html, body, .container-table {
     display: table-cell;
     vertical-align: middle;
 }
+
+.navbar .fui-gear {
+    padding-right: 25px;
+}
+
+table tr {
+    cursor: pointer;
+}

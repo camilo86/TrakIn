@@ -24,6 +24,6 @@ Route::post('register', 'Auth\AuthController@postRegister');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/', function() {
-        return 'Hey';
+        return view('dashboard/home');
     });
 });
