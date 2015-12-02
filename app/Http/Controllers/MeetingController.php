@@ -100,7 +100,6 @@ class MeetingController extends Controller
 
     public function dashboard()
     {
-        //$currentUser = User::find(Auth::id());
-        return view('dashboard.home')->with('meetings', Auth::user()->meetings());
+         return View('dashboard.home')->with('meetings', Auth::user()->meetings);
     }
 }

@@ -8,10 +8,9 @@ class Meeting extends Model
 {
     protected $table = "meetings";
     protected $fillable = array('name', 'user_id', 'description', 'end_date', 'start_date');
-    protected $hidden = array('user_id');
 
-    public function owner()
+    public function user()
     {
-        return $this->belongsTo('\App\User');
+    	return $this->belongsTo('\App\User');
     }
 }
