@@ -23,7 +23,6 @@ Route::get('register', 'Auth\AuthController@getRegister');
 Route::post('register', 'Auth\AuthController@postRegister');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/', function() {
-        return view('dashboard/home');
-    });
+    Route::get('/', 'MeetingController@dashboard');
+    Route::resource('meeting','MeetingController');
 });
