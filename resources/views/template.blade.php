@@ -14,5 +14,13 @@
         <script type="text/javascript" src="{{ URL::asset('bower_components/moment/min/moment.min.js') }}"></script>
         <script type="text/javascript" src="{{ URL::asset('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
         @yield('content')
+        <script>
+        $(document).ready(function(){
+            $('table tr').click(function(){
+                window.location = $(this).attr('href');
+                return false;
+            });
+        });
+        </script>
     </body>
 </html>

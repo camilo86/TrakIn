@@ -3,11 +3,25 @@
 @section('title', 'Create Meeting')
 
 @section('content')
+
+@include('objects.user_navbar')
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">Meeting Creation Tool</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="jumbotron" style="background-color:#1abc9c; color:white;">
+        <h1>Meeting Creation Tool</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
             <form method="POST" action="/meeting">
-                {!! csrf_field() !!}
                 <div class="form-group">
                     <label for="end_time">Name</label>
                     <input type="text" class="form-control" name="name" placeholder="Name">
@@ -34,14 +48,9 @@
                         </span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
-                <script type="text/javascript">
-                $(function () {
-                    $('#start_time').datetimepicker();
-                    $('#end_time').datetimepicker();
-                });
-                </script>
             </form>
+        </div>
+        <div class="col-md-4">
         </div>
     </div>
 </div>
