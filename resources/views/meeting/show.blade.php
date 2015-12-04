@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title', '{{ $meeting->name }}')
+@section('title', 'Meeting')
 
 @section('content')
     @include('objects.user_navbar')

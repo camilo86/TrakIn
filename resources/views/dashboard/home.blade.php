@@ -35,16 +35,16 @@
                                         <div class='col-sm-6'>
                                             <div class="form-group">
                                                 <label for="end_time">Name</label>
-                                                <input type="text" class="form-control" name="name" placeholder="Name">
+                                                <input type="text" class="form-control" name="name" placeholder="Name" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="end_time">description</label>
-                                                <textarea class="form-control" name="description" placeholder="Add an awesome description" rows="3"></textarea>
+                                                <textarea class="form-control" name="description" placeholder="Add an awesome description" rows="3" required></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="start_time">Starting time</label>
                                                 <div class='input-group date' id='start_time'>
-                                                    <input type='text' class="form-control" name="start_date" placeholder="Starting date and time">
+                                                    <input type='text' class="form-control" name="start_date" placeholder="Starting date and time" required>
                                                     <span class="input-group-addon">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                     </span>
@@ -53,7 +53,7 @@
                                             <div class="form-group">
                                                 <label for="end_time">Ending time</label>
                                                 <div class='input-group date' id='end_time'>
-                                                    <input type='text' class="form-control" name="end_date" placeholder="Ending date and time">
+                                                    <input type='text' class="form-control" name="end_date" placeholder="Ending date and time" required>
                                                     <span class="input-group-addon">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                     </span>

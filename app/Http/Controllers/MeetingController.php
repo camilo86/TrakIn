@@ -50,7 +50,17 @@ class MeetingController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $meeting = Meeting::findOrFail($id);
+        $this->validate($request, [
+        'name' => 'required',
+        'description' => 'required'
+        ]);
+
+        $input = $request->all();
+        $meeting->fill($input)->save();
+
+        return view('meeting.show')->with('meeting', Meeting::find($id));
+
     }
 
     public function destroy($id)
