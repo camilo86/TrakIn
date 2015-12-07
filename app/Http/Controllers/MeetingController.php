@@ -65,7 +65,9 @@ class MeetingController extends Controller
 
     public function destroy($id)
     {
-        //
+        $meeting = Meeting::find($id);
+        $meeting->delete();
+        return redirect('/');
     }
 
     public function dashboard()
