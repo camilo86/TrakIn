@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="end_time">description</label>
-                                                <textarea class="form-control" name="description" placeholder="Add an awesome description" rows="3" required></textarea>
+                                                <textarea class="form-control" name="description" placeholder="Add an awesome description here" rows="3" required></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="start_time">Starting time</label>

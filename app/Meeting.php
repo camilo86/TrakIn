@@ -8,6 +8,7 @@ class Meeting extends Model
 {
     protected $table = "meetings";
     protected $fillable = array('name', 'user_id', 'description', 'end_date', 'start_date');
+    protected $hidden = array('id', 'user_id');
 
     public function user()
     {

@@ -8,9 +8,9 @@
     <div class="collapse navbar-collapse" id="navbar-collapse-8">
         <ul class="nav navbar-nav">
             <li><a href="/">Meetings<span class="navbar-unread">1</span></a></li>
-            <li><a href="/people/lists">Lists</a></li>
+            <li><a href="/list">Lists</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" style="margin-right:0px;">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right:30px;">{{ Auth::user()->name }} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
