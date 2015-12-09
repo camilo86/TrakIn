@@ -19,17 +19,23 @@ class ListController extends Controller
 
     public function create()
     {
-        //
+        return view('list.create');
     }
 
     public function store(Request $request)
     {
-        //
+        $list = new UserList();
+        $list->user_id = Auth::user()->id;
+        $list->name = $request->input('name');
+        $list->description = $request->input('description');
+        $list->save();
+        return redirect('/list');
     }
 
     public function show($id)
     {
-        //
+        $data = array('list' => UserList::find($id), 'users_in_list' => UserList->getUsers($id));
+        return view('list.show')->with('list', $data);
     }
 
     public function edit($id)

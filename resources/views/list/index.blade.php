@@ -6,6 +6,9 @@
 @include('objects.user_navbar')
 
 <div class="container">
+    <ol class="breadcrumb">
+        <li class="active">Lists</li>
+    </ol>
     <div class="row">
         <div class="col-md-3">
             <div class="btn-group">
@@ -15,12 +18,12 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">List Creation Tool</a></li>
+                    <li><a href="/list/create">List Creation Tool</a></li>
                 </ul>
             </div>
         </div>
         <div class="col-md-9">
-            @include('objects.full_list_table')
+            @include('objects.list_table')
         </div>
     </div>
 </div>
@@ -32,7 +35,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Create List</h4>
             </div>
-            <form>
+            <form method="POST" action="/list">
+                {!! csrf_field() !!}
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="end_time">Name</label>
@@ -44,7 +48,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
                 </div>
             </form>
         </div>
