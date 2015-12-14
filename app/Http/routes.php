@@ -25,5 +25,5 @@ Route::post('register', 'Auth\AuthController@postRegister');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/', 'MeetingController@dashboard');
     Route::resource('meeting','MeetingController');
-    Route::resource('list', 'ListController');
+    Route::post('/meetingCreationTool', 'MeetingController@meetingCreationTool');
 });

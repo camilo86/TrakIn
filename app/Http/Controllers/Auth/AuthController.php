@@ -26,6 +26,19 @@ class AuthController extends Controller
     protected $redirectPath = '/';
     protected $loginPath = '/login';
 
+    public function generatePin()
+    {
+        $listUsers = User::all();
+        $pin = rand(0, 9999);
+        foreach($listUsers as $user)
+        {
+            if($pin === $user->pin) {
+                return generatePin();
+            }
+        }
+        return $pin;
+    }
+
     /**
      * Create a new authentication controller instance.
      *
@@ -59,10 +72,13 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $new_pin = $this->generatePin();
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'pin' => $new_pin,
+            'group' => "student",
         ]);
     }
 }

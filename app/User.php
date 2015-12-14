@@ -17,16 +17,11 @@ class User extends Model implements AuthenticatableContract,
     use Authenticatable, Authorizable, CanResetPassword;
 
     protected $table = 'users';
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'pin'];
     protected $hidden = ['id', 'password', 'remember_token'];
 
     public function meetings()
     {
         return $this->hasMany('\App\Meeting');
-    }
-
-    public function lists()
-    {
-        return $this->hasMany('\App\UserList');
     }
 }

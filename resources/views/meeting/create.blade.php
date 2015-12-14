@@ -21,7 +21,7 @@
     </div>
     <div class="row">
         <div class="col-md-8">
-            <form method="POST" action="/meeting">
+            <form method="POST" action="/meetingCreationTool">
                 {!! csrf_field() !!}
                 <div class="form-group">
                     <label for="end_time">Name</label>

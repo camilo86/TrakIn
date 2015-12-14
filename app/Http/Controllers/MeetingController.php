@@ -38,6 +38,19 @@ class MeetingController extends Controller
         return redirect('/');
     }
 
+    public function meetingCreationTool(Request $request)
+    {
+        $meeting = new Meeting();
+
+        $meeting->name = $request->input('name');
+        $meeting->user_id = Auth::user()->id;
+        $meeting->description = $request->input('description');
+        $meeting->start_date = new DateTime($request->input('start_date'));
+        $meeting->end_date = new DateTime($request->input('end_date'));
+        $meeting->save();
+        return redirect('/');
+    }
+
     public function show($id)
     {
         return view('meeting.show')->with('meeting', Meeting::find($id));
@@ -74,4 +87,5 @@ class MeetingController extends Controller
     {
          return View('dashboard.home')->with('meetings', Auth::user()->meetings);
     }
+
 }

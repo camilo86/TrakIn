@@ -20,6 +20,7 @@ class CreateMeetingsTable extends Migration
             $table->longText('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->json('people_in_meeting');
             $table->timestamps();
         });
     }
