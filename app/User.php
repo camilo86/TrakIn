@@ -17,7 +17,7 @@ class User extends Model implements AuthenticatableContract,
     use Authenticatable, Authorizable, CanResetPassword;
 
     protected $table = 'users';
-    protected $fillable = ['name', 'email', 'password', 'pin'];
+    protected $fillable = ['name', 'email', 'password', 'pin', 'group'];
     protected $hidden = ['id', 'password', 'remember_token'];
 
     public function meetings()
