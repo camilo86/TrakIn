@@ -8,12 +8,23 @@
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}">
 
         <style>
+            body {
+                background-color: #000000;
+                padding: 0px;
+                margin: 0px;
+            }
 
+            #gradient {
+                width: 100%;
+                height: 100%;
+                padding: 0px;
+                margin: 0px;
+            }
         </style>
     </head>
-    <body class="target">
+    <body>
+        <div id="gradient" />
         <script src="{{ URL::asset('js/vendor/jquery.min.js') }}"></script>
-        <script src="{{ URL::asset('js/jquery.pulse.js') }}"></script>
         <script src="{{ URL::asset('js/logger.js') }}"></script>
         <script src="{{ URL::asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 

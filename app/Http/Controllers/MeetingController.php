@@ -88,4 +88,9 @@ class MeetingController extends Controller
          return View('dashboard.home')->with('meetings', Auth::user()->meetings);
     }
 
+    public function logger($meeting_id)
+    {
+        return view('meeting.logger')->with('meeting', Meeting::find($meeting_id));
+    }
+
 }
