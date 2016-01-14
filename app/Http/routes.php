@@ -23,6 +23,7 @@ Route::get('register', 'Auth\AuthController@getRegister');
 Route::post('register', 'Auth\AuthController@postRegister');
 
 Route::get('logger/{meeting_id}', 'MeetingController@logger');
+Route::post('/log/{id}', 'MeetingController@log');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/', 'MeetingController@dashboard');

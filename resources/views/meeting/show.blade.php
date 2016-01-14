@@ -14,6 +14,7 @@
             <center>
                 <h1>{{ $meeting->name }}</h1>
                 <p>{{ $meeting->description }} - <a href="/meeting/{{ $meeting->id }}/edit" style="color:black;">Edit</a></p>
+                <a  style="color:white;" href="/logger/{{ $meeting->id }}">Go to meeting</a>
             </center>
         </div>
         <div class="row">

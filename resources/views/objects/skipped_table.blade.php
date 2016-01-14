@@ -6,9 +6,11 @@
         </tr>
     </thead>
     <tbody>
+        @foreach($meeting->getSkipped() as $user)
         <tr href="#">
-            <td>Test person</td>
-            <td>Student</td>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->group }}</td>
         </tr>
+        @endforeach
     </tbody>
 </table>

@@ -7,10 +7,13 @@
         </tr>
     </thead>
     <tbody>
+
+        @foreach($meeting->getAttandance() as $user)
         <tr href="#">
-            <td>Milo Test</td>
-            <td>Mentor</td>
-            <td>0.5</td>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->group }}</td>
+            <td></td>
         </tr>
+        @endforeach
     </tbody>
 </table>

@@ -93,4 +93,47 @@ class MeetingController extends Controller
         return view('meeting.logger')->with('meeting', Meeting::find($meeting_id));
     }
 
+    public function log(Request $request, $id)
+    {
+        $temp_pin = $request->input('pin');
+
+        if(User::where('pin', '=', $temp_pin)->count() <= 0)
+        {
+            return "Epic Fail I can't find you";
+        }else {
+            $current_user = User::where('pin', '=', $temp_pin)->firstOrFail();
+            $people_in_meeting = json_decode(Meeting::find($id)->people_in_meeting, true);
+            $current_people_in_meeting = json_decode(Meeting::find($id)->current_people_in_meeting, true);
+            if(in_array($current_user->id, $people_in_meeting))
+            { // Check out from meeting
+                $temp = Meeting::find($id);
+
+                if(in_array($current_user->id, $current_people_in_meeting))
+                {
+                    $temp_current_people_in_meeting = json_decode($temp->current_people_in_meeting, true);
+                    $temp_current_people_in_meeting = array_diff($temp_current_people_in_meeting, array($current_user->id));
+                    $temp->current_people_in_meeting = json_encode($temp_current_people_in_meeting);
+                    $temp->save();
+                }else
+                {
+                    $temp_current_people_in_meeting = json_decode($temp->current_people_in_meeting, true);
+                    array_push($temp_current_people_in_meeting, $current_user->id);
+                    $temp->current_people_in_meeting = json_encode($temp_current_people_in_meeting);
+                    $temp->save();
+                }
+                return "So you are in the list?";
+            }else
+            {
+                // Check in to meeting and adds to current people in meeting list
+                $temp = Meeting::find($id);
+                $temp_current_people_in_meeting = json_decode($temp->current_people_in_meeting, true);
+                array_push($people_in_meeting, $current_user->id);
+                array_push($temp_current_people_in_meeting, $current_user->id);
+                $temp->people_in_meeting = json_encode($people_in_meeting);
+                $temp->current_people_in_meeting = json_encode($temp_current_people_in_meeting);
+                $temp->save();
+                return "added you to the list";
+            }
+        }
+    }
 }
