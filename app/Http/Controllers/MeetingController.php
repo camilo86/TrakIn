@@ -11,6 +11,8 @@ use App\User;
 use DateTime;
 use Auth;
 use Response;
+use Redirect;
+use Session;
 
 class MeetingController extends Controller
 {
@@ -34,6 +36,8 @@ class MeetingController extends Controller
         $meeting->description = $request->input('description');
         $meeting->start_date = new DateTime($request->input('start_date'));
         $meeting->end_date = new DateTime($request->input('end_date'));
+        $meeting->people_in_meeting = "[]";
+        $meeting->current_people_in_meeting = "[]";
         $meeting->save();
         return redirect('/');
     }
@@ -47,6 +51,8 @@ class MeetingController extends Controller
         $meeting->description = $request->input('description');
         $meeting->start_date = new DateTime($request->input('start_date'));
         $meeting->end_date = new DateTime($request->input('end_date'));
+        $meeting->people_in_meeting = "[]";
+        $meeting->current_people_in_meeting = "[]";
         $meeting->save();
         return redirect('/');
     }
@@ -96,10 +102,11 @@ class MeetingController extends Controller
     public function log(Request $request, $id)
     {
         $temp_pin = $request->input('pin');
+        $msg = "";
 
         if(User::where('pin', '=', $temp_pin)->count() <= 0)
         {
-            return "Epic Fail I can't find you";
+            $msg = '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Epic Fail!</strong> I cannot authenticate you. Contact @camilo_g86.</div>';
         }else {
             $current_user = User::where('pin', '=', $temp_pin)->firstOrFail();
             $people_in_meeting = json_decode(Meeting::find($id)->people_in_meeting, true);
@@ -114,14 +121,15 @@ class MeetingController extends Controller
                     $temp_current_people_in_meeting = array_diff($temp_current_people_in_meeting, array($current_user->id));
                     $temp->current_people_in_meeting = json_encode($temp_current_people_in_meeting);
                     $temp->save();
+                    $msg = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Nice!</strong> You have successfuly checked out.</div>';
                 }else
                 {
                     $temp_current_people_in_meeting = json_decode($temp->current_people_in_meeting, true);
                     array_push($temp_current_people_in_meeting, $current_user->id);
                     $temp->current_people_in_meeting = json_encode($temp_current_people_in_meeting);
                     $temp->save();
+                    $msg = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Coolio!</strong> You have checked in!.</div>';
                 }
-                return "So you are in the list?";
             }else
             {
                 // Check in to meeting and adds to current people in meeting list
@@ -132,8 +140,11 @@ class MeetingController extends Controller
                 $temp->people_in_meeting = json_encode($people_in_meeting);
                 $temp->current_people_in_meeting = json_encode($temp_current_people_in_meeting);
                 $temp->save();
-                return "added you to the list";
+
+                $msg = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Awesome!</strong> You have checked in!.</div>';
             }
         }
+        Session::flash('msg', $msg);
+        return Redirect::back();
     }
 }

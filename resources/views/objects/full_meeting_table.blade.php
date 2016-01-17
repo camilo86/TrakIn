@@ -12,8 +12,8 @@
         <tr href="/meeting/{{ $meeting->id }}">
             <td>{{ $meeting->name }}</td>
             <td>{{ $meeting->description }}</td>
-            <td>{{ $meeting->start_time }}</td>
-            <td>{{ $meeting->end_time }}</td>
+            <td>{{ $meeting->getStartDateTimeString() }}</td>
+            <td>{{ $meeting->getEndDateTimeString() }}</td>
         </tr>
         @endforeach
     </tbody>

@@ -14,6 +14,10 @@
                     <br>
                     <button type="submit" class="btn btn-primary btn-block btn-lg">Check in/out</button>
                 </div>
+
+                @if(Session::has('msg'))
+                    {!! Session::get('msg') !!}
+                @endif
             </form>
         </div>
     </div>

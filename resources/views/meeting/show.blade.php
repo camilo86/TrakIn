@@ -18,13 +18,9 @@
             </center>
         </div>
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <h3>Attendance</h3>
                 @include('objects.attendance_table')
-            </div>
-            <div class="col-md-5">
-                <h3>Skipped*</h3>
-                @include('objects.skipped_table')
             </div>
         </div>
     </div>

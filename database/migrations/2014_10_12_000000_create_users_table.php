@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('pin')->unique();
             $table->string('email')->unique();
             $table->string('password', 60);
+            $table->integer('hours')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

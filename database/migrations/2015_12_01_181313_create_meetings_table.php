@@ -22,6 +22,7 @@ class CreateMeetingsTable extends Migration
             $table->dateTime('end_date');
             $table->json('people_in_meeting');
             $table->json('current_people_in_meeting');
+            $table->json('checkin_times');
             $table->timestamps();
         });
     }

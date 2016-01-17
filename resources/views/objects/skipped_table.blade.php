@@ -6,11 +6,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($meeting->getSkipped() as $user)
-        <tr href="#">
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->group }}</td>
-        </tr>
-        @endforeach
+        @unless(count($meeting->getSkipped()) <= 0)
+            @foreach($meeting->getSkipped() as $user)
+            <tr href="#">
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->group }}</td>
+            </tr>
+            @endforeach
+        @endunless
     </tbody>
 </table>
