@@ -107,7 +107,7 @@ class MeetingController extends Controller
         $msg = "";
 
         if(User::where('pin', '=', $temp_pin)->count() <= 0)
-        {    
+        {
             $msg = '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Epic Fail!</strong> I cannot authenticate you. Contact @camilo_g86.</div>';
         }else {
             $current_user = User::where('pin', '=', $temp_pin)->firstOrFail();
@@ -122,14 +122,14 @@ class MeetingController extends Controller
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('America/New_York'));
 
-                $temp->last_check = intval($now->format('h'));
+                $temp->last_check = intval($now->format('H'));
                 $temp->save();
             }else {
                 $boston_timezone = new DateTimeZone('America/New_York');
 
                 $now = new DateTime();
                 $now->setTimezone($boston_timezone);
-                $now_h = intval($now->format('h'));
+                $now_h = intval($now->format('H'));
 
                 $last_check = Meeting::find($id)->last_check;
 
@@ -141,7 +141,7 @@ class MeetingController extends Controller
                 }
 
                 $temp_m = Meeting::find($id);
-                $temp_m->last_check = intval($now->format('h'));
+                $temp_m->last_check = intval($now->format('H'));
                 $temp_m->save();
             }
 
