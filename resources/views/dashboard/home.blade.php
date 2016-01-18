@@ -6,6 +6,7 @@
 @include('objects/user_navbar')
 
 <div class="container">
+    @if(Auth::user()->group === "mentor")
     <div class="row">
         <div class="col-md-3">
             <div class="btn-group">
@@ -81,5 +82,18 @@
             @include('objects.meeting_table')
         </div>
     </div>
+    @else
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <center>
+            <h3>You have <b style="color:red">{{ Auth::user()->hours }}</b> hours total</h3>
+            </center>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+    @endif
 </div>
 @stop

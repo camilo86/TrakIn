@@ -6,16 +6,18 @@
         <a class="navbar-brand" href="/">TrakIn</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse-8">
+        @if(Auth::user()->group === "mentor")
         <ul class="nav navbar-nav">
             <li><a href="/">Meetings<span class="navbar-unread">1</span></a></li>
-            <li><a href="/list">Lists</a></li>
         </ul>
+        @endif
         <ul class="nav navbar-nav navbar-right" style="margin-right:0px;">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right:30px;">{{ Auth::user()->name }} <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right:30px;">{{ Auth::user()->name }} ({{ Auth::user()->pin }}) <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
-                    <li class="divider"></li>
+                    @if(Auth::user()->group === "mentor")
+                    <li><a href="#">{{ Auth::user()->hours }}</a></li>
+                    @endif
                     <li><a href="/logout">Logout</a></li>
                 </ul>
             </li>

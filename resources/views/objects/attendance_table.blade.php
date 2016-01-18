@@ -12,7 +12,7 @@
         <tr href="#">
             <td>{{ $user->name }}</td>
             <td>{{ $user->group }}</td>
-            <td></td>
+            <td>{{ $user->hours }}</td>
         </tr>
         @endforeach
     </tbody>

@@ -13,6 +13,8 @@ use Auth;
 use Response;
 use Redirect;
 use Session;
+use Carbon;
+use DateTimeZone;
 
 class MeetingController extends Controller
 {
@@ -105,12 +107,47 @@ class MeetingController extends Controller
         $msg = "";
 
         if(User::where('pin', '=', $temp_pin)->count() <= 0)
-        {
+        {    
             $msg = '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Epic Fail!</strong> I cannot authenticate you. Contact @camilo_g86.</div>';
         }else {
             $current_user = User::where('pin', '=', $temp_pin)->firstOrFail();
             $people_in_meeting = json_decode(Meeting::find($id)->people_in_meeting, true);
             $current_people_in_meeting = json_decode(Meeting::find($id)->current_people_in_meeting, true);
+
+            if(count($current_people_in_meeting) <= 0)
+            {
+                // I'm about to log someone, so I must go and setup starting time
+                $temp = Meeting::find($id);
+
+                $now = new DateTime();
+                $now->setTimezone(new DateTimeZone('America/New_York'));
+
+                $temp->last_check = intval($now->format('h'));
+                $temp->save();
+            }else {
+                $boston_timezone = new DateTimeZone('America/New_York');
+
+                $now = new DateTime();
+                $now->setTimezone($boston_timezone);
+                $now_h = intval($now->format('h'));
+
+                $last_check = Meeting::find($id)->last_check;
+
+                foreach($current_people_in_meeting as $user_id)
+                {
+                    $temp_u = User::find($id);
+                    $temp_u->hours += abs($now_h-$last_check);
+                    $temp_u->save();
+                }
+
+                $temp_m = Meeting::find($id);
+                $temp_m->last_check = intval($now->format('h'));
+                $temp_m->save();
+            }
+
+
+
+
             if(in_array($current_user->id, $people_in_meeting))
             { // Check out from meeting
                 $temp = Meeting::find($id);
